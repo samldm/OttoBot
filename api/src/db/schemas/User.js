@@ -3,9 +3,10 @@ const {Schema, model } = require('mongoose');
 const UserSchema = new Schema({
     discordId: { type: String, required: true },
     cocTag: { type: String, required: true },
-    cocName: { type: String, required: true },
+    cocName: { type: String },
     clanTag: { type: String },
     clanRole: { type: String },
+    lastUpdated: { type: Date },
     stats: [{
         date: { type: Date },
         trophies: { type: Number },
