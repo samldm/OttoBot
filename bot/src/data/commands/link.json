@@ -1,0 +1,12 @@
+{
+    "name":"link",
+    "description":"Lier son compte clash of clans au bot",
+    "options": [
+        {
+            "name":"tag",
+            "description":"Votre tag clash of clans",
+            "type":3,
+            "required":true
+        }
+    ]
+}

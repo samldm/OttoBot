@@ -124,7 +124,7 @@ module.exports = (cocClient) => {
 
     router.put('/:id/thRoles', async (req, res) => {
         const { id } = req.params;
-        const { clanRoles: thRoles } = req.body;
+        const { thRoles } = req.body;
         if (thRoles == null) {
             res.status(400).send({ status: "missing th roles in body" });
             return;
@@ -138,13 +138,13 @@ module.exports = (cocClient) => {
             res.status(400).send({ status: "th roles must be an array" });
             return;
         }
-        if (guild.clanRoles == null) {
-            guild.clanRoles = [];
+        if (guild.thRoles == null) {
+            guild.thRoles = [];
         }
         thRoles.forEach(role => {
-            if (role.clanTag != null && role.role != null) {
-                if (!guild.clanRoles.includes(role)) {
-                    guild.clanRoles.push(role);
+            if (role.th != null && role.role != null) {
+                if (!guild.thRoles.includes(role)) {
+                    guild.thRoles.push(role);
                 }
             }
         });
@@ -171,10 +171,10 @@ module.exports = (cocClient) => {
         }
         if (Array.isArray(th)) {
             th.forEach(t => {
-                guild.clanRoles = guild.clanRoles.filter(role => role.th != t);
+                guild.thRoles = guild.thRoles.filter(role => role.th != t);
             });
         } else {
-            guild.clanRoles = guild.clanRoles.filter(role => role.th != th);
+            guild.thRoles = guild.thRoles.filter(role => role.th != th);
         }
         await guild.save();
         res.send({ status: "ok", guild });
@@ -187,7 +187,7 @@ module.exports = (cocClient) => {
             res.status(400).send({ status: "missing channel id in body" });
             return;
         }
-        let guild = await Guild.findOne({ guildID: id }) == null;
+        let guild = await Guild.findOne({ guildID: id });
         if (guild == null) {
             res.status(404).send({ status: "guild not found" });
             return;
@@ -204,7 +204,7 @@ module.exports = (cocClient) => {
             res.status(400).send({ status: "missing channel id in body" });
             return;
         }
-        let guild = await Guild.findOne({ guildID: id }) == null;
+        let guild = await Guild.findOne({ guildID: id });
         if (guild == null) {
             res.status(404).send({ status: "guild not found" });
             return;

@@ -1,0 +1,106 @@
+{
+    "name":"config",
+    "description":"Configurer le bot",
+    "options": [
+        {
+            "type": 1,
+            "name": "admin_role",
+            "description": "Role qui donne accès a la config et au dashboard",
+            "options": [
+                {
+                    "type": 8,
+                    "name": "role",
+                    "description": "Role",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": 1,
+            "name": "delete_admin_role",
+            "description": "Retirer la permission d'accès a la config et au dashboard"
+        },
+        {
+            "type": 1,
+            "name": "th_role",
+            "description": "Mettre un place un role d'HDV",
+            "options": [
+                {
+                    "type": 8,
+                    "name": "role",
+                    "description": "Role",
+                    "required": true
+                },
+                {
+                    "type": 4,
+                    "name": "th",
+                    "description": "Niveau d'HDV",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": 1,
+            "name": "delete_th_role",
+            "description": "Supprimer un role d'HDV",
+            "options": [
+                {
+                    "type": 4,
+                    "name": "th",
+                    "description": "Niveau d'HDV",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": 1,
+            "name": "clan_role",
+            "description": "Mettre en place les roles de clan",
+            "options": [
+                {
+                    "type": 8,
+                    "name": "role",
+                    "description": "Role",
+                    "required": true
+                },
+                {
+                    "type": 3,
+                    "name": "clan",
+                    "description": "Tag du clan",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": 1,
+            "name": "delete_clan_role",
+            "description": "Supprimer un role de clan",
+            "options": [
+                {
+                    "type": 3,
+                    "name": "clan",
+                    "description": "Tag du clan",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": 1,
+            "name": "gold_pass_channel",
+            "description": "Mettre en place le channel des gold pass",
+            "options": [
+                {
+                    "type": 7,
+                    "name": "channel",
+                    "description": "Channel",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": 1,
+            "name": "delete_gold_pass_channel",
+            "description": "Supprimer le channel des gold pass"
+        }
+    ]
+}

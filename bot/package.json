@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/samldm/Discord.js-Bot-Template#readme",
   "dependencies": {
+    "axios": "^1.4.0",
     "chalk": "4.1.2",
     "dayjs": "^1.11.5",
     "discord.js": "^14.3.0",
-    "dotenv": "^16.0.2"
+    "dotenv": "^16.0.2",
+    "node-cron": "^3.0.2"
   }
 }
