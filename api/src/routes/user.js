@@ -3,49 +3,51 @@ const router = Router();
 const { User } = require('../db'); 
 
 async function updateUserStats(cocClient, user) {
-    let player = await cocClient.getPlayer(user.cocTag);
-    if (player == null) {
-        return false;
-    }
-    user.lastUpdated = Date.now();
+    if (user.lastUpdated == null || Date.now() - user.lastUpdated >= (15 * 60 * 1000)) {
+        let player = await cocClient.getPlayer(user.cocTag);
+        if (player == null) {
+            return false;
+        }
+        user.lastUpdated = Date.now();
 
-    if (player.name != user.name) {
-        user.name = player.name;
-    }
+        if (player.name != user.name) {
+            user.name = player.name;
+        }
 
-    if (player.clan != null && player.clan.tag != user.clanTag) {
-        user.clanTag = player.clan.tag;
-        user.clanName = player.clan.name;
-        user.clanRole = player.role;
-    }
+        if (player.clan != null && player.clan.tag != user.clanTag) {
+            user.clanTag = player.clan.tag;
+            user.clanName = player.clan.name;
+            user.clanRole = player.role;
+        }
 
-    if (user.stats == null) {
-        user.stats = [];
+        if (user.stats == null) {
+            user.stats = [];
+        }
+        user.stats.push({
+            date: Date.now(),
+            trophies: player.trophies,
+            bbTrophies: player.builderHallTrophies,
+            warStars: player.warStars,
+            thLevel: player.townHallLevel,
+            bbLevel: player.builderHallLevel,
+            donations: player.donations,
+            troops: player.troops.map(troop => {
+                return {
+                    name: troop.name,
+                    level: troop.level,
+                    village: troop.village
+                };
+            }),
+            heroes: player.heroes.map(hero => {
+                return {
+                    name: hero.name,
+                    level: hero.level,
+                    village: hero.village
+                };
+            })
+        });
+        await user.save();
     }
-    user.stats.push({
-        date: Date.now(),
-        trophies: player.trophies,
-        bbTrophies: player.builderHallTrophies,
-        warStars: player.warStars,
-        thLevel: player.townHallLevel,
-        bbLevel: player.builderHallLevel,
-        donations: player.donations,
-        troops: player.troops.map(troop => {
-            return {
-                name: troop.name,
-                level: troop.level,
-                village: troop.village
-            };
-        }),
-        heroes: player.heroes.map(hero => {
-            return {
-                name: hero.name,
-                level: hero.level,
-                village: hero.village
-            };
-        })
-    });
-    await user.save();
     return true;
 }
 
