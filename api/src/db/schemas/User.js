@@ -5,6 +5,7 @@ const UserSchema = new Schema({
     cocTag: { type: String, required: true },
     cocName: { type: String },
     clanTag: { type: String },
+    clanName: { type: String },
     clanRole: { type: String },
     lastUpdated: { type: Date },
     stats: [{

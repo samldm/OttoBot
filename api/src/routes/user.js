@@ -10,8 +10,8 @@ async function updateUserStats(cocClient, user) {
         }
         user.lastUpdated = Date.now();
 
-        if (player.name != user.name) {
-            user.name = player.name;
+        if (player.name != user.cocName) {
+            user.cocName = player.name;
         }
 
         if (player.clan != null && player.clan.tag != user.clanTag) {

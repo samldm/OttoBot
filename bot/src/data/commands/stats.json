@@ -1,0 +1,12 @@
+{
+    "name":"stats",
+    "description":"Voir vos stats ou celui d'un autre utilisateur",
+    "options": [
+        {
+            "name":"user",
+            "description":"L'utilisateur dont vous voulez voir les stats",
+            "type":6,
+            "required":false
+        }
+    ]
+}

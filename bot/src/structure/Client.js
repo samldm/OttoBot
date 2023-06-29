@@ -28,6 +28,8 @@ module.exports = class AdvancedClient extends Client
             global: require('../../config/global')
         }
 
+        this.api = new (require('../utils/Api'))(this.configs.global.api.url);
+
         this._loadedCmds = [];
     }
 
@@ -58,8 +60,9 @@ module.exports = class AdvancedClient extends Client
             Logger.log(`${this.user.tag} is ready.`);
         });
 
-        this.login(process.env.TOKEN).catch(() => {
+        this.login(process.env.TOKEN).catch((e) => {
             Logger.error("Invalid token provided. See '/config/global.js'.");
+            console.error(e);
         });
         this.tests.runTests("init_end");
     }
