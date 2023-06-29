@@ -10,5 +10,11 @@ module.exports = (cocClient) => {
     router.use('/clan', clan);
     router.use('/guild', guild);
 
+    router.get('/goldPass', async (req, res) => {
+        let goldPass = await cocClient.getGoldPassSeason();
+        console.log(goldPass);
+        res.send({ status: "ok", goldPass });
+    });
+
     return router;
 };

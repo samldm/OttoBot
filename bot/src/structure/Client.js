@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const TestsManager = require('../manager/TestsManager');
 
+const CronJobManager = require('../manager/CronJobManager');
+
 module.exports = class AdvancedClient extends Client
 {
     /**
@@ -14,11 +16,12 @@ module.exports = class AdvancedClient extends Client
      */
     constructor(opt) {
         super(opt);
-        Logger.info("AdvancedClient Starting...");
+        Logger.info("Starting...");
 
         this.tests = new TestsManager(this);
         this.manager = new Manager();
         this.manager.commands.fetchAll();
+        this.jobs = new CronJobManager(this).init();
 
         this.commands = new Collection();
         this.guildCommands = new Collection();

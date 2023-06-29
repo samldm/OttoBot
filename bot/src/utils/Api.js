@@ -75,4 +75,100 @@ module.exports = class Api {
         this.guildCache.set(id, guild.guild);
         return guild;
     }
+
+    async deleteGuildAdminRole(id) {
+        const response = await fetch(`${this._url}/guild/${id}/adminRole`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        let guild = await response.json();
+        this.guildCache.set(id, guild.guild);
+        return guild;
+    }
+
+    async putGuildClanRole(id, role) {
+        const response = await fetch(`${this._url}/guild/${id}/clanRoles`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ clanRoles: [role] })
+        });
+        let guild = await response.json();
+        this.guildCache.set(id, guild.guild);
+        return guild;
+    }
+
+    async deleteGuildClanRole(id, tag) {
+        const response = await fetch(`${this._url}/guild/${id}/clanRoles`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ tag })
+        });
+        let guild = await response.json();
+        this.guildCache.set(id, guild.guild);
+        return guild;
+    }
+
+    async putGuildThRole(id, role) {
+        console.log(role);
+        const response = await fetch(`${this._url}/guild/${id}/thRoles`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ thRoles: [role] })
+        });
+        let guild = await response.json();
+        console.log(guild);
+        this.guildCache.set(id, guild.guild);
+        return guild;
+    }
+
+    async deleteGuildThRole(id, th) {
+        const response = await fetch(`${this._url}/guild/${id}/thRoles`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ th })
+        });
+        let guild = await response.json();
+        this.guildCache.set(id, guild.guild);
+        return guild;
+    }
+
+    async putGuildGoldPassChannel(id, channelID) {
+        const response = await fetch(`${this._url}/guild/${id}/goldPassChannel`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ channelID })
+        });
+        let guild = await response.json();
+        this.guildCache.set(id, guild.guild);
+        return guild;
+    }
+
+    async deleteGuildGoldPassChannel(id) {
+        const response = await fetch(`${this._url}/guild/${id}/goldPassChannel`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        let guild = await response.json();
+        this.guildCache.set(id, guild.guild);
+        return guild;
+    }
+
+    async getGoldPass() {
+        const response = await fetch(`${this._url}/goldPass`);
+        return await response.json();
+    }
 }

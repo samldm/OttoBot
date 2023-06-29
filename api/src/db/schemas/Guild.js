@@ -12,7 +12,7 @@ const GuildSchema = new Schema({
         th: { type: Number, required: true },
         role: { type: String, required: true },
     }],
-    goldpassChannel: { type: String },
+    goldPassChannel: { type: String },
 });
 
 module.exports = model('Guild', GuildSchema);
