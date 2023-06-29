@@ -73,7 +73,7 @@ module.exports = (cocClient) => {
         const { cocTag } = req.body;
 
         if (cocTag == null) {
-            res.status(400).send({ status: "missing coc tag" });
+            res.status(400).send({ status: "missing coc tag in body" });
             return;
         }
 

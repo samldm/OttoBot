@@ -1,0 +1,14 @@
+{
+  "name": "ottobot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "api": "cd ./api && node .",
+    "bot": "cd ./bot && node .",
+    "dashboard": "cd ./dashboard && node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
