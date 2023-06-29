@@ -1,12 +1,14 @@
 const {Router} = require('express');
 const router = Router();
 
-const user = require('./user');
-const player = require('./player');
-const guild = require('./guild');
+module.exports = (cocClient) => {
+    const user = require('./user')(cocClient);
+    const guild = require('./guild')(cocClient);
+    const clan = require('./clan')(cocClient);
 
-router.use('/user', user);
-router.use('/player', player);
-router.use('/guild', guild);
+    router.use('/user', user);
+    router.use('/clan', clan);
+    router.use('/guild', guild);
 
-module.exports = router;
+    return router;
+};
