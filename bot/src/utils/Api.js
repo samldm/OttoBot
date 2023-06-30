@@ -171,4 +171,15 @@ module.exports = class Api {
         const response = await fetch(`${this._url}/goldPass`);
         return await response.json();
     }
+
+    async putStats(stats) {
+        const response = await fetch(`${this._url}/stats`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(stats)
+        });
+        return await response.json();
+    }
 }
