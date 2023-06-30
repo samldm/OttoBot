@@ -2,7 +2,7 @@
   "name": "ottobot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "api": "cd ./api && node .",
     "bot": "cd ./bot && node .",
