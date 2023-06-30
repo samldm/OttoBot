@@ -1,0 +1,86 @@
+<%- include('part/header.ejs', { pageTitle: 'Statistiques', user }) %>
+
+<section class="hero">
+    <div class="hero-body">
+      <p class="title">
+        Statistiques <%= user.cocName %>:
+      </p>
+    </div>
+  </section>
+
+<section class="section">
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child">
+                <div class="notification is-primary">
+                    <p class="title">Statistiques du compte</p>
+                    <p class="subtitle">Trophés principal: <strong class="has-text-white"><%= user.stats[0].trophies %></strong></p>
+                    <p class="subtitle">Trophés ouvriers: <strong class="has-text-white"><%= user.stats[0].bTrophies %></strong></p>
+                    <p class="subtitle">Nombre d'étoiles de guerre: <strong class="has-text-white"><%= user.stats[0].warStars %></strong></p>
+                    <p class="subtitle">Niveau de l'HDV: <strong class="has-text-white"><%= user.stats[0].level %></strong></p>
+                    <p class="subtitle">Niveau de la MDO: <strong class="has-text-white"><%= user.stats[0].bbLevel %></strong></p>
+                    <p class="subtitle">Dons au sein du clan: <strong class="has-text-white"><%= user.stats[0].donations %></strong></p>
+                </div>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child">
+                <div class="notification is-link">
+                    <p class="title">Informations du compte</p>
+                    <p class="subtitle">Tag: <strong class="has-text-white"><%= user.cocTag %></strong></p>
+                    <p class="subtitle">Clan: <strong class="has-text-white"><%= user.clanName %></strong> (<%= user.clanTag %>)</p>
+                </div>
+            </article>
+        </div>
+    </div>
+    
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <article class="tile is-child">
+                <div class="notification is-secondary">
+                    <p class="title">Niveaux des troupes</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Troupe</th>
+                                <th>Niveau</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% user.stats[0].troops.forEach(troop => { %>
+                                <tr>
+                                    <td><%= troop.name %></td>
+                                    <td><%= troop.level %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child">
+                <div class="notification is-warning">
+                    <p class="title">Niveaux des Héros</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Héros</th>
+                                <th>Niveau</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% user.stats[0].heroes.forEach(hero => { %>
+                            <tr>
+                                <td><%= hero.name %></td>
+                                <td><%= hero.level %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<%- include('part/footer.ejs') %>

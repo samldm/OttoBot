@@ -114,6 +114,20 @@ app.get('/commands', async (req, res) => {
     renderTemplate(req, res, 'commands.ejs', { commands: commands.commands });
 });
 
+app.get("/stats", checkAuth, async (req, res) => {
+    res.redirect(`/stats/${req.user.id}`);
+});
+
+app.get('/stats/:id', checkAuth, async (req, res) => {
+    const { id } = req.params;
+    let resp = await api.getUser(id);
+    if (resp.status != "ok")
+        return res.redirect('/');
+    let user = resp.user;
+
+    renderTemplate(req, res, 'stats.ejs', { user });
+});
+
 app.get('/dashboard', checkAuth, async (req, res) => {
     renderTemplate(req, res, 'select_server.ejs', { guilds: req.user.guilds.filter(g => (g.permissions & 0x20) === 0x20) });
 });

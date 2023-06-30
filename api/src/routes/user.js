@@ -10,9 +10,7 @@ async function updateUserStats(cocClient, user) {
         }
         user.lastUpdated = Date.now();
 
-        if (player.name != user.cocName) {
-            user.cocName = player.name;
-        }
+        user.cocName = player.name;
 
         if (player.clan != null && player.clan.tag != user.clanTag) {
             user.clanTag = player.clan.tag;
@@ -26,7 +24,7 @@ async function updateUserStats(cocClient, user) {
         user.stats.push({
             date: Date.now(),
             trophies: player.trophies,
-            bbTrophies: player.builderHallTrophies,
+            bbTrophies: player.versusTrophies,
             warStars: player.warStars,
             thLevel: player.townHallLevel,
             bbLevel: player.builderHallLevel,

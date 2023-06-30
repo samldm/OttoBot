@@ -3,6 +3,11 @@ module.exports = class {
         this._url = url;
     }
 
+    async getUser(id) {
+        const response = await fetch(`${this._url}/user/${id}`);
+        return await response.json();
+    }
+    
     async getStats() {
         const response = await fetch(`${this._url}/stats`);
         return await response.json();
