@@ -8,11 +8,13 @@ module.exports = (cocClient) => {
     const guild = require('./guild')(cocClient);
     const clan = require('./clan')(cocClient);
     const stats = require('./stats')(cocClient);
+    const cache = require('./cache')(cocClient);
 
     router.use('/user', user);
     router.use('/clan', clan);
     router.use('/guild', guild);
     router.use('/stats', stats);
+    router.use('/cache', cache);
 
     router.get('/goldPass', async (req, res) => {
         if (goldPass == null)

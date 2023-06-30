@@ -39,7 +39,7 @@ module.exports = {
 
             case "clan_role":
                 options = {
-                    clanTag: interaction.options.getString('clan_tag'),
+                    clanTag: interaction.options.getString('clan'),
                     role: interaction.options.getRole('role').id
                 }
                 
@@ -54,7 +54,7 @@ module.exports = {
             
             case "delete_clan_role":
                 options = {
-                    clanTag: interaction.options.getString('clan_tag')
+                    clanTag: interaction.options.getString('clan')
                 }
 
                 let deleteClanRoleRes = await client.api.deleteGuildClanRole(interaction.guild.id, options.clanTag);
@@ -68,7 +68,7 @@ module.exports = {
 
             case "th_role":
                 options = {
-                    thLevel: interaction.options.getInteger('th_level'),
+                    thLevel: interaction.options.getInteger('th'),
                     role: interaction.options.getRole('role').id
                 }
 
@@ -83,7 +83,7 @@ module.exports = {
             
             case "delete_th_role":
                 options = {
-                    thLevel: interaction.options.getInteger('th_level')
+                    thLevel: interaction.options.getInteger('th')
                 }
 
                 let deleteThRoleRes = await client.api.deleteGuildThRole(interaction.guild.id, options.thLevel);

@@ -97,6 +97,7 @@ module.exports = class Api {
             body: JSON.stringify({ clanRoles: [role] })
         });
         let guild = await response.json();
+        console.log(guild);
         this.guildCache.set(id, guild.guild);
         return guild;
     }
@@ -179,6 +180,28 @@ module.exports = class Api {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(stats)
+        });
+        return await response.json();
+    }
+
+    async putRoles(id, roles) {
+        const response = await fetch(`${this._url}/cache/roles/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ roles })
+        });
+        return await response.json();
+    }
+
+    async putChannels(id, channels) {
+        const response = await fetch(`${this._url}/cache/channels/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ channels })
         });
         return await response.json();
     }

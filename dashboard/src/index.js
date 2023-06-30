@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
+app.use("/public", express.static(__dirname + '/public'));
 
 
 passport.use(new DiscordStrategy(
@@ -119,8 +119,45 @@ app.get('/dashboard', checkAuth, async (req, res) => {
 });
 
 app.get('/dashboard/:guildID', checkAuth, async (req, res) => {
-    let guild = await api.getGuild(req.params.guildID);
-    renderTemplate(req, res, 'dashboard.ejs', { guild: guild.guild });
+    const { guildID } = req.params;
+    let resp = await api.getGuild(guildID);
+    if (resp.status != "ok")
+        return res.redirect('/dashboard');
+    let guild = resp.guild;
+    if (guild.ownerID != req.user.id) {
+        return res.redirect('/dashboard');
+    }
+    let channels = await api.getChannels(guildID);
+    let roles = await api.getRoles(guildID);
+    let guildData = req.user.guilds.find(g => g.id == guildID);
+    renderTemplate(req, res, 'dashboard.ejs', { gData: guildData, guild, channels: channels.channels, roles: roles.roles });
+});
+
+app.post('/dashboard/:id/save', checkAuth, async (req, res) => {
+    const { id } = req.params;
+    const options = req.body;
+
+    if (options.adminRole) {
+        api.putGuildAdminRole(id, options.adminRole);
+    }
+    if (options.goldPassChannel) {
+        api.putGuildGoldPassChannel(id, options.goldPassChannel);
+    }
+
+    if (options.clanRoles) {
+        api.putGuildClanRole(id, options.clanRoles);
+    }
+    if (options.deleteClanRoles) {
+        api.deleteGuildClanRole(id, options.deleteClanRoles);
+    }
+
+    if (options.thRoles) {
+        api.putGuildThRole(id, options.thRoles);
+    }
+    if (options.deleteThRoles) {
+        api.deleteGuildThRole(id, options.deleteThRoles);
+    }
+    res.send({ status: "ok" });
 });
 
 app.listen(process.env.PORT || 4040, () => {

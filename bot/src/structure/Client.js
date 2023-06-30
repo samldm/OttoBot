@@ -18,6 +18,7 @@ module.exports = class AdvancedClient extends Client
         super(opt);
         Logger.info("Starting...");
 
+        this.status = -1;
         this.tests = new TestsManager(this);
         this.manager = new Manager();
         this.manager.commands.fetchAll();

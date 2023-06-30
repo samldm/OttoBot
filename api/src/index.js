@@ -16,7 +16,7 @@ const cocClient = new Client({
     await cocClient.login({ email: process.env.COC_API_EMAIL, password: process.env.COC_API_PASSWORD });
 
     const app = express();
-    
+
     app.use((req, res, next) => {
         if (DEBUG) {
             console.log(`[${req.method}] ${req.path} ${req.body != null ? '*' : ''}`);
@@ -29,6 +29,7 @@ const cocClient = new Client({
     app.use(express.json());
 
     app.use('/', routes);
+    app.get('/ping', (req, res) => res.send({ status: "ok" }));
 
     app.listen(PORT, () => console.log('Server running on port ' + PORT));
 })();

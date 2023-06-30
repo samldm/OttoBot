@@ -52,6 +52,7 @@ module.exports = class TestsManager
   runTests(step) {
     if (!this.run) return null;
     this.tests.forEach((t) => {
+      if (t.enabled == false) return;
       if (t.when == step) {
         if (t.name) Logger.log(`Running test "${t.name}"`);
         try {

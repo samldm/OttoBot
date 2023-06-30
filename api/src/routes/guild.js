@@ -2,7 +2,6 @@ const {Router} = require('express');
 const { Guild } = require('../db');
 const router = Router();
 
-
 module.exports = (cocClient) => {
     router.get('/:id', async (req, res) => {
         const { id } = req.params;
@@ -84,12 +83,12 @@ module.exports = (cocClient) => {
         clanRoles.forEach(role => {
             if (role.clanTag != null && role.role != null) {
                 if (!guild.clanRoles.includes(role)) {
-                    guild.clanRoles.push(role);
+                    guild.clanRoles.push({ clanTag: role.clanTag, role: role.role });
                 }
             }
         });
 
-        await guild.save();
+        await guild.save({ safe: false });
         res.send({ status: "ok", guild });
     });
 
@@ -117,7 +116,7 @@ module.exports = (cocClient) => {
         } else {
             guild.clanRoles = guild.clanRoles.filter(role => role.clanTag != tag);
         }
-        await guild.save();
+        await guild.save({ safe: false });
         res.send({ status: "ok", guild });
     });
 
@@ -142,13 +141,14 @@ module.exports = (cocClient) => {
             guild.thRoles = [];
         }
         thRoles.forEach(role => {
+            console.log(role, Number(role.th), role.role);
             if (role.th != null && role.role != null) {
                 if (!guild.thRoles.includes(role)) {
-                    guild.thRoles.push(role);
+                    guild.thRoles.push({ th: Number(role.th), role: role.role });
                 }
             }
         });
-        await guild.save();
+        await guild.save({ safe: false });
         res.send({ status: "ok", guild });
     });
 
@@ -176,7 +176,7 @@ module.exports = (cocClient) => {
         } else {
             guild.thRoles = guild.thRoles.filter(role => role.th != th);
         }
-        await guild.save();
+        await guild.save({ safe: false });
         res.send({ status: "ok", guild });
     });
 

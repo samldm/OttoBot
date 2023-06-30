@@ -23,6 +23,13 @@ module.exports = {
                 uptime: formatUptime(client.uptime),
                 commands: client.commands.map((cmd) => cmd.data)
             });
+
+            client.guilds.cache.forEach(async (guild) => {
+                await guild.roles.fetch();
+                await guild.channels.fetch();
+                client.api.putRoles(guild.id, guild.roles.cache.map((role) => ({ id: role.id, name: role.name})));
+                client.api.putChannels(guild.id, guild.channels.cache.map((channel) => ({ id: channel.id, name: channel.name})));
+            });
         }, 1000);
     }
 }
