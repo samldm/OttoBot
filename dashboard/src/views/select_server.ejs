@@ -1,0 +1,21 @@
+<%- include('part/header.ejs', { pageTitle: 'Selection de serveur', user }) %>
+<section class="hero">
+    <div class="hero-body">
+      <p class="title">
+        Configuration du Bot:
+      </p>
+    </div>
+  </section>
+
+<section class="container is-max-desktop">
+    <% if (guilds.length > 0) { %>
+        <% guilds.forEach(guild => { %>
+            <%- include('part/guildCard.ejs', {guild}) %>
+        <% }) %>
+    <% } else { %>
+        <p class="title has-text-centered">
+            Aucun serveur à afficher.....
+        </p>
+    <% } %>
+</section>
+<%- include('part/footer.ejs') %>

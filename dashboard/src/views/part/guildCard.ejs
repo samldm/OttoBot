@@ -1,0 +1,19 @@
+    <article class="notification is-dark">
+        <article class="media">
+            <figure class="media-left">
+                <p class="image is-128x128">
+                    <% if (guild.icon) { %>
+                    <img class="is-rounded" src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png">
+                    <% } else { %>
+                    <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png">
+                    <% } %>
+                </p>
+            </figure>
+            <div class="media-content">
+                <div class="content">
+                    <p class="title"><%= guild.name %></p>
+                    <a href="/dashboard/<%= guild.id %>" class="button is-medium is-primary is-success">Configurer</a>
+                </div>
+            </div>
+        </article>
+    </article>

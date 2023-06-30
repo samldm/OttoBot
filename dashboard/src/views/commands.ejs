@@ -1,0 +1,27 @@
+<%- include('part/header.ejs', { pageTitle: 'Accueil', user }) %>
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title has-text-centered">
+                Commandes
+            </h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% commands.forEach(command => { %>
+                    <tr>
+                        <td><%= command.name %></td>
+                        <td><%= command.description %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<%- include('part/footer.ejs') %>
